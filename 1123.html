@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Detection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f8ff;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            margin-top: 50px;
+        }
+        input[type="file"] {
+            margin: 20px 0;
+        }
+        .results {
+            margin-top: 50px;
+            padding: 20px;
+            border: 2px solid #333;
+            display: none;
+            background-color: #fff;
+        }
+        .parameter {
+            margin: 10px 0;
+            font-weight: bold;
+        }
+        .real {
+            color: green;
+        }
+        .fake {
+            color: red;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Currency Fake Detection</h1>
+    <form id="currencyForm">
+        <input type="file" id="currencyImage" accept="image/*" required><br>
+        <button type="button" onclick="analyzeCurrency()">Submit</button>
+    </form>
+    <div class="results" id="results">
+        <h2>Detection Results</h2>
+        <img id="uploadedImage" alt="Uploaded Currency Note"><br>
+        <div class="parameter" id="param1"></div>
+        <div class="parameter" id="param2"></div>
+        <div class="parameter" id="param3"></div>
+        <div class="parameter" id="param4"></div>
+        <div class="parameter" id="param5"></div>
+        <h2 class="result" id="finalResult"></h2>
+    </div>
+
+    <script>
+        function analyzeCurrency() {
+            // Simulate analysis with random values
+            const params = [
+                { name: "Watermark Clarity", value: Math.random() > 0.5 ? "Clear" : "Blurry" },
+                { name: "Color Consistency", value: Math.random() > 0.5 ? "Consistent" : "Inconsistent" },
+                { name: "Security Thread", value: Math.random() > 0.5 ? "Present" : "Missing" },
+                { name: "UV Features", value: Math.random() > 0.5 ? "Visible" : "Not Visible" },
+                { name: "Paper Quality", value: Math.random() > 0.5 ? "High" : "Low" }
+            ];
+
+            // Randomly decide if the note is real or fake
+            const isFake = Math.random() > 0.5;
+
+            // Display results
+            document.getElementById("param1").textContent = `${params[0].name}: ${params[0].value}`;
+            document.getElementById("param2").textContent = `${params[1].name}: ${params[1].value}`;
+            document.getElementById("param3").textContent = `${params[2].name}: ${params[2].value}`;
+            document.getElementById("param4").textContent = `${params[3].name}: ${params[3].value}`;
+            document.getElementById("param5").textContent = `${params[4].name}: ${params[4].value}`;
+            document.getElementById("finalResult").textContent = isFake ? "The currency note is FAKE" : "The currency note is REAL";
+            document.getElementById("finalResult").className = isFake ? "result fake" : "result real";
+            
+            // Display uploaded image
+            const fileInput = document.getElementById("currencyImage");
+            const image = document.getElementById("uploadedImage");
+            image.src = URL.createObjectURL(fileInput.files[0]);
+            
+            document.getElementById("results").style.display = "block";
+        }
+    </script>
+</body>
+</html>
